@@ -11,7 +11,6 @@ tmp
 *.pyc
 .venv
 
-app/logs
 
 # CLIENT
 

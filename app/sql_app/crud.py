@@ -22,6 +22,9 @@ def get_books(db: Session):
     books = db.query(Book).order_by(Book.title.asc()).all()
     return jsonable_encoder(books)
 
+def get_book_by_id(db: Session, book_id: int):
+    return db.query(Book).filter(Book.id == book_id).first()
+
 def create_book(db: Session, book: BookCreate):
     db_book = Book(**book.dict())
     db.add(db_book)
