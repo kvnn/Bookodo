@@ -15,10 +15,11 @@ from sqlalchemy.orm import Session
 import redis
 
 from config import settings
+from scripts import import_books_from_json
 from services.list_image import ListImageService
 from services.auth import AuthService
 from sql_app import crud, models
-from sql_app.database import get_db, engine
+from sql_app.database import get_db, engine, SessionLocal
 from sql_app.schemas import CreateListImageRequest, UserCreateRequest, UserLoginRequest, ListCreate, ListBookCreate
 
 
@@ -35,6 +36,13 @@ redis_url = settings.redis_url
 redis_client = redis.from_url(redis_url)
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
+
+''' Seed our db '''
+db = SessionLocal()
+if not db.query(models.Book).first():
+    import_books_from_json()
+
+''' end Seed '''
 
 
 @app.get("/", response_class=HTMLResponse)

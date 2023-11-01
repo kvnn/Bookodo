@@ -13,7 +13,7 @@ class Settings(BaseSettings):
     celery_result_backend: str = default_redis_url
     redis_url: str = default_redis_url
     model_config = SettingsConfigDict(env_file=".env")
-    postgres_user: str
-    postgres_db: str
+    postgres_user: str = ''
+    postgres_db: str = ''
 
 settings = Settings()

@@ -6,6 +6,7 @@ from sqlalchemy.orm import Session, joinedload
 
 from utils import get_scene_image_url
 from sql_app.models import Book, List, User
+from sql_app.schemas import BookCreate
 
 
 logging.basicConfig(level=logging.INFO)
@@ -20,6 +21,12 @@ def get_user_by_username(db: Session, username: str):
 def get_books(db: Session):
     books = db.query(Book).order_by(Book.title.asc()).all()
     return jsonable_encoder(books)
+
+def create_book(db: Session, book: BookCreate):
+    db_book = Book(**book.dict())
+    db.add(db_book)
+    db.commit()
+    return db_book
 
 ''' Lists '''
 def _add_img_url_to_lists(lists):

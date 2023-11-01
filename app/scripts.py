@@ -20,9 +20,8 @@ def import_books_from_json(filepath = 'books.json'):
         if isbn and len(isbn) == 0:
             book_data['isbn'] = None
  
-        book_schema = BookCreate(**book_data)
         try:
-            create_book(db, book_schema)
+            create_book(db, BookCreate(**book_data))
             print(f'successfully imported book {book_data["title"]}')
         except Exception as e:
             print(f'error improting book {book_data["title"]}: {e}')
