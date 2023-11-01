@@ -11,6 +11,7 @@ tmp
 *.pyc
 .venv
 
+app/sql_app.db
 
 # CLIENT
 
