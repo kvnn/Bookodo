@@ -82,6 +82,9 @@ def generate_list_image(
                 print(f's3 img_path={img_path}')
             else:
                 img_path = f'{images_path}/{filename}'
+                directory = os.path.dirname(img_path)
+                if not os.path.exists(directory):
+                    os.makedirs(directory)
                 with open(img_path, "wb") as img_file:
                     img_file.write(b64_img)
                 print(f'local img_path={img_path}')
