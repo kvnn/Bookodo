@@ -1,7 +1,7 @@
 from config import settings
 
 
-def get_scene_image_url(filename):
+def get_list_image_url(filename):
     if settings.in_cloud:
         # TODO: pull from a config setting
         return f"https://{settings.s3_bucket_name_media}.s3.amazonaws.com/{filename}"

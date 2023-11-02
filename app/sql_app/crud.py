@@ -4,7 +4,7 @@ import logging
 from fastapi.encoders import jsonable_encoder
 from sqlalchemy.orm import Session, joinedload
 
-from utils import get_scene_image_url
+from utils import get_list_image_url
 from sql_app.models import Book, List, User
 from sql_app.schemas import BookCreate
 
@@ -35,7 +35,7 @@ def create_book(db: Session, book: BookCreate):
 def _add_img_url_to_lists(lists):
     for list in lists:
         if list.image_filename:
-            list.image_url = get_scene_image_url(list.image_filename)
+            list.image_url = get_list_image_url(list.image_filename)
     return lists
 
 def get_lists(db:Session, user_id: int = None):
