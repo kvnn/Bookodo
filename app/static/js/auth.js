@@ -21,6 +21,7 @@ $(document).ready(function() {
         // Lazy logout
         sessionStorage.removeItem("access_token");
         $('body').removeClass('logged-in');
+        window.location.reload();
     });
 
     // TODO: generalize these submit handlers
@@ -76,6 +77,8 @@ $(document).ready(function() {
             data: JSON.stringify(data),
             success: function(response) {
                 handleAccessToken(response.access_token, true);
+                // TODO: reload "All Lists" vs "My Lists" instead of full page
+                window.location.reload();
             }
         }).fail(function(jqXHR, textStatus, errorThrown) {
             // Handle error during the request
